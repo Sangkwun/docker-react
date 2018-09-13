@@ -14,6 +14,8 @@ RUN npm run build
 # Run phase
 FROM nginx
 
+EXPOSE 80
+
 # From option to choose where it come from
 # Check nginx image document
 COPY --from=builder /app/build /usr/share/nginx/html
