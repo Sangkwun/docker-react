@@ -1,0 +1,12 @@
+# super user required
+sudo: required
+
+services:
+  - docker
+
+# tag를 붙여줘야 이름으로 실행함.
+before_install:
+  - docker build -t wer2774/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run wer2774/docker-react npm run test
