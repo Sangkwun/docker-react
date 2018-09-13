@@ -9,4 +9,4 @@ before_install:
   - docker build -t wer2774/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run wer2774/docker-react npm run test
+  - docker run wer2774/docker-react npm run test -- --coverage
