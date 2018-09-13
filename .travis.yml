@@ -8,5 +8,23 @@ services:
 before_install:
   - docker build -t wer2774/docker-react -f Dockerfile.dev .
 
+# test실행.
 script:
   - docker run wer2774/docker-react npm run test -- --coverage
+
+# deploy를 위함. 아래 정보를 AWS에서 확인해서 입력.
+deploy: 
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "docker-react"
+  env: "DockerReact-env"
+  # S3는 자동으로 Elastic beanstalk 생성시에 생성됨 이를 입력.
+  bucket_name: "elasticbeanstalk-ap-northeast-2-817574142290"
+  bucket_path: "docker-react" # appname과 같이 되있음.
+  on:
+    branch: master #master에 push가 될 경우 deploy.
+
+  # Option으로 설정해준 환경과 연결.
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
